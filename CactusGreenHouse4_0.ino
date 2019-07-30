@@ -1,39 +1,26 @@
 #include <TridentTD_LineNotify.h>
-
-/*  
-  A0 LED
-  GPIO5  D1 LED
-  GPIO4  D2 FLM
-  GPIO14 D4 TMP
-  GPIO12 D6 PIR
-  GPIO13 D7 GAS
-*/
-
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include "DHT.h"
 #include <SPI.h>
-//#include <Ethernet.h>
+#include <Ethernet.h>
 
 #define BLYNK_PRINT Serial
-#define SOILPIN A0     // Digital pin connected to the Soil sensor
-#define LDRPIN D4     //  LDR
-#define RELAY1 D0    // Water Pumb
-#define RELAY2 D1    // Fan
-#define RELAY3 D2    // Light
-#define DHTPIN D8    // DHT sensor
-#define RELAY4 D3    // ???
-//#define DHTTYPE DHT11   // DHT 11
-#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
-//#define DHTTYPE DHT21   // DHT 21 (AM2301)
-//#define LINE_TOKEN "lVGke50f4LCZ0TxQGQJwtTobjoMyFpLM3TjjskJBJLZ"  //line token at https://notify-bot.line.me/en/
-#define LINE_TOKEN "GqZV1lmff68hI3Nt4j7l5RfKSt0voRiDrtWlq8R1EqJ"
-char auth[] = "FfRc9qVD2sWwODvjTkZ0KWMoOTVEsgw5"; // 
-//char auth[] = "9W-aoZDtPhkh2QyDuWZICpKXMSLkfpgu";
-char ssid[] = "SIRIN-IOT";
-char pass[] = "@1234567";
-//char ssid[] = "HATORI";
-//char pass[] = "123456789*000";
+#define SOILPIN A0          // Digital pin connected to the Soil sensor
+#define LDRPIN D4           //  LDR
+#define RELAY1 D0           // Water Pumb
+#define RELAY2 D1           // Fan
+#define RELAY3 D2           // Light
+#define DHTPIN D8           // DHT sensor
+#define RELAY4 D3           // ???
+//#define DHTTYPE DHT11     // DHT 11
+#define DHTTYPE DHT22       // DHT 22  (AM2302), AM2321
+//#define DHTTYPE DHT21     // DHT 21 (AM2301)
+//#define LINE_TOKEN "xxx"  // line token at https://notify-bot.line.me/en/
+#define LINE_TOKEN "xxx"    // line token at https://notify-bot.line.me/en/
+char auth[] = "xxx"; // 
+char ssid[] = "xxx";
+char pass[] = "xxx";
 int pinValue = 0;
 int state = 0;
 int statusSystem = 0;
@@ -81,11 +68,6 @@ void loop()
 BLYNK_WRITE(V1)
 {
   pinValue = param.asInt();
-/*
-  if(pinValue == 1)
-  {
-    Serial.println("Good");
-  }*/
 }
 
 void alarm() {
@@ -124,7 +106,7 @@ void humitempSensor()
     if(h >= 85)
     {
       delay(200);
-      //myLINE.notify("ความชื้นในโรงเรือนสูง!!!");
+      myLINE.notify("ความชื้นในโรงเรือนสูง!!!");
       Serial.println("Humidity is High!!!");      
     }
   }
@@ -139,26 +121,13 @@ void humitempSensor()
       digitalWrite(RELAY2, 0);          
     }
   }
-/*  
-  if (h >= 85 && statusSystem == 0) {
-    delay(200);
-    myLINE.notify("ความชื้นในโรงเรือนสูง!!!");
-    Serial.println("Humidity is High!!!");
-  } else if (h >= 85 && statusSystem == 1){
-    Serial.println("Automatic Control");
-    digitalWrite(RELAY2, 1);
-    //delay(1000);
-  } else{
-    digitalWrite(RELAY2, 0);
-  }
-*/
 
   if(statusSystem == 0)
   {
     if(t >= 30)
     {
       delay(200);
-      //myLINE.notify("อุณหภูมิในโรงเรือนสูง!!!");
+      myLINE.notify("อุณหภูมิในโรงเรือนสูง!!!");
       Serial.println("Temperature is High!!!");      
     }
   }
@@ -173,19 +142,6 @@ void humitempSensor()
       digitalWrite(RELAY1, 0);          
     }
   }
-/*
-  if (t >= 30 && statusSystem == 0) {
-    delay(200);
-    myLINE.notify("อุณหภูมิในโรงเรือนสูง!!!");
-    Serial.println("Temperature is High!!!");
-  } else if (t >= 30 && statusSystem == 1){
-    Serial.println("Automatic Control");
-    digitalWrite(RELAY1, 1);
-    //digitalWrite(RELAY2, LOW);
-    //delay(1000);
-  }  else{
-    digitalWrite(RELAY1, 0);
-  }*/
 }
 
 void soilSensor()
@@ -199,7 +155,7 @@ void soilSensor()
     if(soilValue <= 60)
     {
       delay(200);
-      //myLINE.notify("ความชื้นในดินต่ำ!!!");
+      myLINE.notify("ความชื้นในดินต่ำ!!!");
       Serial.println("Soil Moisture is Low!!!");      
     }
   }
@@ -214,19 +170,7 @@ void soilSensor()
       digitalWrite(RELAY1, 0);
     }
   }
-/*  
-  if (soilValue >= 60 && statusSystem == 0) {
-    delay(200);
-    myLINE.notify("ความชื้นในดินต่ำ!!!");
-    Serial.println("Soil Moisture is Low!!!");
-  } else if (soilValue >= 60 && statusSystem == 1){
-    Serial.println("Automatic Control");
-    digitalWrite(RELAY3, 1);
-    //delay(1000);
-  } else{
-    digitalWrite(RELAY3, 0);
-  }
-*/  
+  
   Serial.print(F("Soil Moisture: "));
   Serial.println(soilValue);
 }
