@@ -7,7 +7,7 @@
 
 #define BLYNK_PRINT Serial
 #define SOILPIN A0          // Digital pin connected to the Soil sensor
-#define LDRPIN D4           //  LDR
+#define LDRPIN D4           // LDR
 #define RELAY1 D0           // Water Pumb
 #define RELAY2 D1           // Fan
 #define RELAY3 D2           // Light
