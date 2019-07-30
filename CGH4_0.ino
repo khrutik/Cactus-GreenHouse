@@ -1,14 +1,4 @@
 #include <TridentTD_LineNotify.h>
-
-/*  
-  A0 LEDxx
-  GPIO5  D1 LED
-  GPIO4  D2 FLM
-  GPIO14 D4 TMP
-  GPIO12 D6 PIR
-  GPIO13 D7 GAS
-*/
-
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include "DHT.h"
@@ -23,17 +13,17 @@
 #define RELAY3 D2    // Light
 #define DHTPIN D4    // DHT sensor
 #define RELAY4 D5    // ??
-#define DHTTYPE DHT11   // DHT 11
+//#define DHTTYPE DHT11   // DHT 11
 //#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
-//#define LINE_TOKEN "lVGke50f4LCZ0TxQGQJwtTobjoMyFpLM3TjjskJBJLZ"  //line token at https://notify-bot.line.me/en/
-#define LINE_TOKEN "GqZV1lmff68hI3Nt4j7l5RfKSt0voRiDrtWlq8R1EqJ"
-char auth[] = "FfRc9qVD2sWwODvjTkZ0KWMoOTVEsgw5"; // 
-//char auth[] = "9W-aoZDtPhkh2QyDuWZICpKXMSLkfpgu";
-char ssid[] = "SIRIN-IOT";
-char pass[] = "@1234567";
-//char ssid[] = "HATORI";
-//char pass[] = "123456789*000";
+//#define LINE_TOKEN "xxxx"  //line token at https://notify-bot.line.me/en/
+#define LINE_TOKEN "xxxx"    //line token at https://notify-bot.line.me/en/
+char auth[] = "xxxx"; // 
+//char auth[] = "xxxx";
+char ssid[] = "xxxx";
+char pass[] = "xxxx";
+//char ssid[] = "xxx";
+//char pass[] = "xxx";
 int pinValue = 0;
 int state = 0;
 int statusSystem = 0;
